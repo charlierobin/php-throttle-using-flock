@@ -56,11 +56,13 @@ $throttle = new ThrottleViaFileLock('Test');
 
 if ($throttle->allowed()) {
 
-    // enough time has passed since last check: we can go ahead and do whatever it was that we wanted to do
+    // enough time has passed since last check: we can go
+    // ahead and do whatever it was that we wanted to do
     
 } else {
 
-    // not enough time has paased: deny the request, or buffer it, or whatever your strategy is for dealing with this situation
+    // not enough time has paased: deny the request, or buffer it,
+    // or whatever your strategy is for dealing with this situation
 }
 ```
 In the example above, the unique id is `Test`, so the file needed in the `CharlieRobinThrottle` directory would be `CharlieRobinThrottleTest.txt`.
