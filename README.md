@@ -10,6 +10,7 @@ A `CharlieRobinThrottle` directory is required at the same level as the webroot 
 
 ie:
 
+```
 the-server/
    domain-directory/
       public_html/
@@ -17,9 +18,10 @@ the-server/
       public_ftp/
 
       (etc etc depending on your setup)
-
+```
 ... becomes ...
 
+```
 the-server/
    domain-directory/
       public_html/
@@ -27,6 +29,7 @@ the-server/
       public_ftp/
       CharlieRobinThrottle/
          CharlieRobinThrottle-uniqueIdentifer.txt
+```
 
 Each throttled service must its own unique identifier, and uses a file together with PHP’s fopen/flock as persistence between different PHP executions.
 
@@ -40,7 +43,7 @@ But if you are throttling two things, with different allowed intervals between t
 
 Using the provided `install.php` script, or manually using your own FTP or other server files manager.
 
-## (2) Create instance of `ThrottleViaFileLock` class and use it:
+### (2) Create instance of `ThrottleViaFileLock` class and use it:
 
 ```
 <?php
@@ -64,7 +67,7 @@ In the example above, the unique id is `Test`, so the file needed in the `Charli
 
 Each call to `allowed()` updates the time recorded in the `flock` file. An alternative (and perhaps better) would be that it’s only updated on a success, not on a failure. But again, this is the way I wanted it for myself. If you need something different, it’s simple enough to change. (In the `allowed()` method of the `ThrottleViaFileLock` class definition.)
 
-## (3) Alternatively, create your own subclass of `ThrottleViaFileLock` and use that:
+### (3) Alternatively, create your own subclass of `ThrottleViaFileLock` and use that:
 
 ```
 <?php
