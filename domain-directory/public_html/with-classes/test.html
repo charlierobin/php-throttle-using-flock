@@ -1,0 +1,74 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+
+    <title>Throttle Testing</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script>
+
+        function send(json) {
+
+            const http = angular.injector(["ng"]).get("$http");
+
+            http.post("test-service-endpoint-that-we-want-to-throttle.php", json, { headers: { 'Content-Type': 'application/json' } }).then(function successCallback(response) {
+
+                if (response.data.result == "OK") {
+
+                    console.log(response.data.data);
+
+                } else {
+
+                    console.log(response);
+                }
+
+            }, function errorCallback(error) {
+
+                console.log(error);
+            });
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <script>
+
+        const json1 = {
+            name: "Charlie",
+            nights: 7,
+            telephone: "01234 1234567",
+            email: "charlie@test.com"
+        };
+
+        const json2 = {
+            name: "Eric",
+            nights: 14,
+            telephone: "top secret",
+            email: "eric@clapton.com"
+        };
+
+        setTimeout(function () {
+
+            send(json1);
+
+        }, 1000);
+
+        setTimeout(function () {
+
+            send(json2);
+
+        }, 2000);
+
+
+    </script>
+
+</body>
+
+</html>
