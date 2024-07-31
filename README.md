@@ -33,6 +33,8 @@ the-server/
 
 Each throttled service must its own unique identifier, and uses a file together with PHP’s fopen/flock as persistence between different PHP executions.
 
+https://www.php.net/manual/en/function.flock.php
+
 In other words, if you are throttling just one thing, there will be just one file in `CharlieRobinThrottle`: `CharlieRobinThrottleIdentifer1.txt`.
 
 But if you are throttling two things, with different allowed intervals between them etc, then there will be `CharlieRobinThrottleIdentifer1.txt` and `CharlieRobinThrottleIdentifer2.txt`.
@@ -93,8 +95,9 @@ All of this works on my local MAMP Pro install using Apache, and works on the li
 
 Beyond that, I’m not sure what the situation is with Windows or any other flavour/combinations of server software.
 
+I was originally trying to implement the persistence using a MySQL table, together with `SELECT ... FOR UPDATE` for row locking, but couldn’t get it to work, and at the moment I don’t have the time to look into it all in more detail. 
 
-
+So, for now, imperfect as using `flock` might possibly be, it seems to do the job, although at the end of the day the sites I’ve used it on are not exactly high (or even moderate, by some standards) traffic.
 
 
 
